@@ -6,7 +6,7 @@ bool queroFicar = true;
 do
 {
     Console.WriteLine("Escolha uma opção do menu:");
-    Console.WriteLine("0) Sair\n1) Somar números\n2) Converter de metros para milímetros\n3) Baskara");
+    Console.WriteLine("0) Sair\n1) Somar números\n2) Converter de metros para milímetros\n3) Baskara\n4) Jogo da Velha");
 
     try
     {
@@ -53,6 +53,34 @@ do
                 Console.WriteLine($"As raízes são {raizes[0]:F2} e {raizes[1]:F2}");
                 break;
 
+            case 4:
+                JogoDaVelha jogoDaVelha = new JogoDaVelha();
+
+                jogoDaVelha.MostrarTabuleiro();
+
+                var count = 0;
+
+                bool posicaoValida;
+                while (!jogoDaVelha.TemGanhador)
+                {
+                    var desenho = count % 2 == 0 ? "X" : "O";
+
+                    Console.WriteLine($"Vez do {desenho}!");
+
+                    do
+                    {
+                        Console.WriteLine("Escolha a linha (1 a 3): ");
+                        var linha = LerInteiro();
+
+                        Console.WriteLine("Escolha a coluna (1 a 3): ");
+                        var coluna = LerInteiro();
+
+
+                        posicaoValida = jogoDaVelha.Preencher(linha, coluna, desenho);
+                    } while (!posicaoValida);
+                    count++;
+                }
+                break;
             default:
                 Console.WriteLine("Desculpa, não entendi o que foi digitado. Por favor, escolha um número de 0 a 3");
                 break;
